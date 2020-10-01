@@ -1,6 +1,4 @@
-import {
-  handleClick
-} from '../../main.js';
+import { handleClick } from '../../main.js';
 
 export function SignIn() {
   const thirdView = document.getElementById('container');
@@ -45,9 +43,9 @@ export function SignIn() {
     const password = document.getElementById('password').value;
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-        console.log('cuenta creada con éxito');
-        window.location.hash = '#/Profile';
-      })
+      console.log('cuenta creada con éxito');
+      window.location.hash = '#/Profile';
+    })
       .catch((error) => {
         // Handle Errors here.Crear un catch y un then 
         let errorCode = error.code;
@@ -84,9 +82,9 @@ export function SignIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
     // Popup es para abrir una ventana emergente
     firebase.auth().signInWithPopup(provider).then((result) => {
-        let token = result.credential.accessToken;
-        let user = result.user;
-      })
+      let token = result.credential.accessToken;
+      let user = result.user;
+    })
       .catch((error) => {
         let errorCode = error.code;
         const errorMessage = error.message;
