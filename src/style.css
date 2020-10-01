@@ -7,6 +7,7 @@
 body {
   display: block;
   background-color: #E5E5E5;
+  height: auto;
 }
 
 /*-------------------------HOME-------------------------*/
@@ -43,7 +44,8 @@ a {
   text-decoration: none;
 }
 
-.Join, .SignIn {
+.Join,
+.SignIn {
   color: #FFFFFF;
   font-size: 14px;
   font-family: 'Robot', sans-serif;
@@ -66,6 +68,7 @@ input {
 }
 
 footer {
+  width: 100%;
   height: 7vh;
   background: #229ACF;
   font-family: 'Roboto';
@@ -76,6 +79,8 @@ footer {
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
+  position: absolute;
+  bottom: 0;
 }
 
 /* -------------------------SIGN IN -------------------------*/
@@ -126,7 +131,8 @@ footer {
 
 /* ------------------------- END  WAVE ------------------------- */
 
-#close {
+#close,
+.close {
   border-radius: 50px;
   width: 25px;
   height: 25px;
@@ -154,7 +160,7 @@ input {
   border-radius: 8px;
   width: 210px;
   background-color: #E5E5E5;
-  margin: 10px 80px;
+  margin: 10px auto;
   padding: 10px;
   border: none;
   border: 1px solid #ccc;
@@ -176,7 +182,7 @@ input {
   background-color: #E57011;
   border-radius: 20px;
   padding: 6px 25px;
-  margin: 50px 35%;
+  margin: 50px auto;
 }
 
 .signGoogle {
@@ -190,7 +196,7 @@ input {
 .signGoogle img {
   width: 30px;
   height: 30px;
-  margin: 15px;
+  margin: 15px 0;
 }
 
 .signGoogle p {
@@ -262,7 +268,7 @@ input {
   border-radius: 8px;
   width: 210px;
   background-color: #E5E5E5;
-  margin-top: 70px;
+  margin-top: 140px;
   padding: 10px;
   border: none;
   border: 1px solid #ccc;
@@ -300,4 +306,91 @@ input {
 .LogGoogle p {
   margin: 18px 0px;
   font-size: 15px;
+}
+
+
+/* ------------------------- WALL------------------------- */
+
+/* ================== MENU DESPLEGABLE================== */
+
+
+
+/* ================== FIN MENU DESPLEGABLE================== */
+
+
+
+.modal-window {
+
+  display: none;
+  position: relative;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  align-items: center;
+  top: 0;
+  margin: auto;
+  margin-top: 10%;
+  background-color: #3d1e38ef;
+  width: 330px;
+  height: 420px;
+  border-radius: 10px;
+  box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  transition: 350ms all;
+  padding: 5px;
+  font-size: 10px;
+  flex-direction: column;
+
+}
+
+.newPost {
+  border-radius: 10px;
+  background-color: aquamarine;
+  padding: 8%;
+  margin: 2%;
+  margin-left: 10%;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (min-width: 600px) {
+
+  /*-------------------------HOME-------------------------*/
+  .homeWave {
+    height: 50px;
+    width: 100%;
+    background: #229ACF;
+    padding: 10px 30px;
+
+  }
+
+  .textP img {
+    width: 550px;
+    margin-left: 35%;
+  }
+
+  h1 {
+    width: 70%;
+    font-size: 60px;
+  }
+
+  p {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+
+  .Join,
+  .SignIn {
+    margin-left: 43%;
+    margin-right: 5%;
+    ;
+  }
+
+  footer {
+    margin-bottom: -500px;
+  }
+
 }

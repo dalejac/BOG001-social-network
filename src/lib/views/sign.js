@@ -1,84 +1,99 @@
-import {handleClick} from "../../main.js";
+import {
+  handleClick
+} from '../../main.js';
 
-export function SignIn () {
+export function SignIn() {
+  const thirdView = document.getElementById('container');
 
-  let thirdView = document.getElementById("container");
-
-  let view = document.createElement("section");
+  const view = document.createElement('section');
   thirdView.appendChild(view);
-  let header = document.createElement("div");
-  header.classList.add("waveSign")
+  const header = document.createElement('div');
+  header.classList.add('waveSign');
   header.innerHTML = `
         <h1 class="welcome"> Welcome!</h1> 
         <h1 class="create"> Create account!</h1>
         <button id= "close" href="/"> X </button>     
         <div class="wrapper">
         <div class="wave"></div>
-        </div>`
+        </div>`;
   view.appendChild(header);
 
-  let btnClose = document.getElementById("close");
-  btnClose.addEventListener("click", (e) => {
+  const btnClose = document.getElementById('close');
+  btnClose.addEventListener('click', (e) => {
     handleClick(e);
   });
 
-  let form = document.createElement("form");
+  const form = document.createElement('form');
   form.innerHTML = `
-    <input type="text" id="name" placeholder="Name">
-    <input type="email" id="email" placeholder="E-mail">
-    <input type="password" id="password" placeholder="Password">`
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="E-mail">
+        <input type="password" id="password" placeholder="Password">`;
   view.appendChild(form);
 
-  let btnSignIn = document.createElement("a");
-  btnSignIn.classList.add("btnSignIn");
-  btnSignIn.innerHTML = "Sign In";
+  function messageSign(errorText) {
+    // crear un modal
+    console.log(errorText);
+  }
+
+  const btnSignIn = document.createElement('a');
+  btnSignIn.classList.add('btnSignIn');
+  btnSignIn.innerHTML = 'Sign In';
   view.appendChild(btnSignIn);
-  btnSignIn.addEventListener("click", (e) => {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+  btnSignIn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorMessage);
-    });
-
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-      };
-    });
-  });
-
-  let signGoogle = document.createElement("a");
-  signGoogle.classList.add("signGoogle");
-  signGoogle.href = "#/Wall";
-  signGoogle.innerHTML = `<img src="/src/Imagenes/googleIcono.png"/> <p>Sign in with Google</p> `
-  view.appendChild(signGoogle);
-  signGoogle.addEventListener("click", (e) => {
-
-    var provider = new firebase.auth.GoogleAuthProvider(); // Con provider estamos indicando que se pueda autenticar con googlr
-    // Popup es para abrir una ventana emergente
-    firebase.auth().signInWithPopup(provider).then(function (result) {
-        var token = result.credential.accessToken;
-        var user = result.user;
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        console.log('cuenta creada con éxito');
+        window.location.hash = '#/Profile';
       })
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-        alert(errorMessage);
+      .catch((error) => {
+        // Handle Errors here.Crear un catch y un then 
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        messageSign(error.message);
       });
 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        let displayName = user.displayName;
+        let email = user.email;
+        let emailVerified = user.emailVerified;
+        let photoURL = user.photoURL;
+        let isAnonymous = user.isAnonymous;
+        let uid = user.uid;
+        let providerData = user.providerData;
+      }
+    });
+  });
+
+  function googleSigin(errorText) {
+    // crear un modal
+    console.log(errorText);
+  }
+
+  const signGoogle = document.createElement('a');
+  signGoogle.classList.add('signGoogle');
+  signGoogle.href = '#/Wall';
+  signGoogle.innerHTML = '<img src="./Imagenes/googleIcono.png"/> <p>Sign in with Google</p>';
+  view.appendChild(signGoogle);
+  signGoogle.addEventListener('click', () => {
+    // Estamos indicando que se pueda autenticar con google
+    const provider = new firebase.auth.GoogleAuthProvider();
+    // Popup es para abrir una ventana emergente
+    firebase.auth().signInWithPopup(provider).then((result) => {
+        let token = result.credential.accessToken;
+        let user = result.user;
+      })
+      .catch((error) => {
+        let errorCode = error.code;
+        const errorMessage = error.message;
+        let email = error.email;
+        let credential = error.credential;
+        googleSigin(errorMessage);
+      });
   });
   return view;
-};
+}
