@@ -15,7 +15,8 @@
     "stylelint": "stylelint --aei src/**/*.css",
     "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
     "test": "jest",
-    "start": "serve src/"
+    "start": "serve src/",
+    "deploy": "gh-pages -d src"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -36,7 +37,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dalejac/BOG001-social-network.git"
