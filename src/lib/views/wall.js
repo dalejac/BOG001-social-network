@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // import { handleClick } from "../../main";
 
 export function Wall() {
@@ -25,8 +26,58 @@ export function Wall() {
     <h1> Benevole </h1>`;
   view.appendChild(header);
 
-  // Initialize Firestore
-  var db = firebase.firestore();
+  // Initialize Firestore -Funciones de firestore
+  const db = firebase.firestore();
+
+  function editPost(id, post) {
+    console.log(id);
+    console.log(post);
+    document.getElementById('publication').value = `${post.post}`;
+    const update = document.getElementsById('postModal');
+    update.innerHTML = 'Edit';
+    update.addEventListener('click', () => {
+      const edit = db.collection('Post').doc(id);
+      const newDescription = document.getElementById('publication').value;
+      return edit.update({
+        post: newDescription,
+      })
+        .then(() => {
+          update.innerHTML = 'Save';
+          console.log('Document successfully updated!');
+        })
+        .catch((error) => {
+          // The document probably doesn't exist.
+          console.error('Error updating document: ', error);
+        });
+    });
+  }
+
+  function deletePost(id) {
+    console.log(id);
+    db.collection('Post').doc(id).delete().then(() => {
+      console.log('Document successfully deleted!');
+    })
+      .catch((error) => {
+        console.error('Error removing document: ', error);
+      });
+  }
+  function createPost(postSpaceElement, id, post) {
+    postSpaceElement.insertAdjacentHTML('beforeend', `
+    <div>
+      <button class="btnDelete" id ="post${id}">Delete</button>
+      <button class="btnEdit" id ="edit${id},${post}">Edit</button>
+      ${post.post}
+    </div>`);
+    const btndelete = document.getElementById(`post${id}`);
+    console.log(btndelete);
+    btndelete.addEventListener('click', () => {
+      deletePost(id);
+    });
+    const btnedit = document.getElementById(`edit${id},${post}`);
+    btnedit.addEventListener('click', () => {
+      editPost(id, post);
+    });
+  }
 
   const profile = document.getElementById('profile');
   profile.addEventListener('click', () => {
@@ -72,42 +123,40 @@ export function Wall() {
   // Creamos el input de la vista de wall
   const posts = document.createElement('div');
   posts.classList.add('postSpace');
+  posts.setAttribute('id', 'postSpace');
   view.appendChild(posts);
   const modals = document.createElement('div');
   posts.classList.add('modals');
   modals.innerHTML = `
         <input type="text" id="Post" placeholder="What's new?">
         `;
+  posts.appendChild(modals);
+
+  
 
   // Espacio del Post en la vista de Wall
-  const posted = document.createElement('div');
-  posted.classList.add('posted');
-  posted.setAttribute('id', 'posted');
-  view.appendChild(posted);
-  function createPost() {
-    const newpost = document.getElementById('posted');
-    console.log(newpost);
+  // function elementsPost(id, post) {
+  //   createPost(posts, id, post);
+  // }
+  function loadPosts() {
+    posts.innerHTML = '';
     db.collection('Post').onSnapshot((querySnapshot) => {
-      newpost.innerHTML = ' ';
       querySnapshot.forEach((doc) => {
+        // eslint-disable-next-line no-use-before-define
+        createPost(posts, doc.id, doc.data());
         console.log(`${doc.id} => ${doc.data()}`);
-        newpost.innerHTML += `
-      <div class="newPost"> ${doc.data().post}
-      </div>
-      <button id="favorite" class="btnWall">Favorite</button>
-      <button id="like" class="btnWall">Like</button>
-      <button id="comment" class="btnWall">Comment</button>
-      `;
       });
     });
-    var docRef = db.collection('Post').doc('some-id');
-
-// Update the timestamp field with the value from the server
-var updateTimestamp = docRef.update({
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-});
   }
-  createPost();
+
+  loadPosts();
+  //     <button id="favorite" class="btnWall">Favorite</button>
+  //     <button id="like" class="btnWall">Like</button>
+  //     <button id="comment" class="btnWall">Comment</button>
+  //     `;
+  //
+
+  // createPost();
 
   // Es la funcion que abre el modal
   posts.appendChild(modals);
@@ -124,15 +173,11 @@ var updateTimestamp = docRef.update({
   const modalPost = document.getElementById('postModal');
   modalPost.addEventListener('click', () => {
     const description = document.getElementById('publication').value;
-    // const time = new Timestamp ( seconds :  number ,  nanoseconds :  number ) : Timestamp
-    // const date = new Date();
-    // document.write()(" " +date.getDate()," " +date.getDay()," "+date.getMonth()," "+date.getFullYear(),""+date.getUTCHours());
-    // // var d = new Date();
-
-    db.collection('Post').add({
+    const newPost = {
       post: description,
-      // time: date,
-    })
+    };
+
+    db.collection('Post').add(newPost)
       .then((docRef) => {
         console.log('Document written with ID: ', docRef.id);
         document.getElementById('publication').value = '';
@@ -141,14 +186,12 @@ var updateTimestamp = docRef.update({
       .catch((error) => {
         console.error('Error adding document: ', error);
       });
-
-    createPost();
-
     modal.style.display = 'none';
   });
 
   return view;
 }
+
 
 // Un evento que confirma si el usuario est alogueado o no
 // firebase.auth().onAuthStateChanged((user) => {
@@ -176,4 +219,3 @@ var updateTimestamp = docRef.update({
         } else {
             console.log("sign out")
         } */
-// });

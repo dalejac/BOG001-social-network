@@ -80,9 +80,9 @@ export function LogIn() {
     // Popup es para abrir una ventana emergente
     firebase.auth().signInWithPopup(provider).then((result) => {
       const token = result.credential.accessToken;
-      console.log(token);
+      // console.log(token);
       const user = result.user;
-      console.log(user);
+      // console.log(user);
       window.location.hash = '#/Wall';
     }).catch((error) => {
       let errorCode = error.code;
@@ -91,7 +91,7 @@ export function LogIn() {
       let credential = error.credential;
       messageGoogle(error.message);
     });
-    console.log(provider);
+    // console.log(provider);
   });
   return view;
 }
