@@ -72,7 +72,7 @@ export function LogIn() {
 
   const logGoogle = document.createElement('a');
   logGoogle.classList.add('LogGoogle');
-  logGoogle.innerHTML = '<img src="/Imagenes/googleIcono.png"/> <p>Sign in with Google</p> ';
+  logGoogle.innerHTML = '<img src="/Imagenes/googleIcono.png"/> <p>Log in with Google</p> ';
   view.appendChild(logGoogle);
   logGoogle.addEventListener('click', () => {
     // Estamos indicando que se pueda autenticar con google
