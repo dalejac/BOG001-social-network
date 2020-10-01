@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-// import { handleClick } from "../../main";
-
 export function Wall() {
   console.log('usted esta en wall');
   const wallView = document.getElementById('container');
@@ -153,8 +150,6 @@ export function Wall() {
   //     <button id="comment" class="btnWall">Comment</button>
   //     `;
   //
-
-  // createPost();
 
   // Es la funcion que abre el modal
   posts.appendChild(modals);
