@@ -1,58 +1,97 @@
+import { handleClick } from '../../main.js';
 
-import {handleClick} from "../../main.js"
+export function LogIn() {
+  const secondView = document.getElementById('container');
 
-export function LogIn () { 
+  const view = document.createElement('section');
+  secondView.appendChild(view);
+  const header = document.createElement('div');
+  header.classList.add('waveLog');
+  header.innerHTML = `
+        <h1 class = "welcome"> Welcome</h1> 
+        <h1 class = "welcomeBack" "welcome"> Back!</h1>
+        <button id= "close" href="/"> X </button>
+        <div class="wrapper">
+        <div class="wave"></div>
+        </div>`;
+  view.appendChild(header);
 
-    let secondView = document.getElementById("container");
+  const btnClose = document.getElementById('close');
+  btnClose.addEventListener('click', (e) => {
+    handleClick(e);
+  });
 
-    let view = document.createElement("section");
-    secondView.appendChild(view);
-    let header = document.createElement("div");
-    header.innerHTML = `
-        <h1 class = "welcome"> Welcome </br> Back!</h1>
-        <div class="wave"style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-2.54,146.53 C50.51,172.20 209.65,-13.31 500.84,141.61 L508.17,-34.03 L-1.41,-37.00 Z" style="stroke: none; fill: #229ACF;"></path></svg></div>`
-    view.appendChild(header);
+  const form = document.createElement('form');
+  form.innerHTML = `
+        <input class="loginInput1" type="email" id="email" placeholder="E-mail">
+        <input class="loginInput" type="password" id="password" placeholder="Password">`;
+  view.appendChild(form);
 
-    let form = document.createElement("form")
-    form.innerHTML = `
-    <input type="email" id="emailLog" placeholder="E-mail">
-    <input type="text" id="passwordLog" placeholder="Password">`
-    view.appendChild(form);
+  function message(errorText) {
+    // crear un modal
+    console.log(errorText);
+  }
 
-    let btnLogIn = document.createElement("a");
-    btnLogIn.classList.add("LogIn");
-    btnLogIn.href= "#/Wall";
-    btnLogIn.innerHTML = "Log In"
-    view.appendChild(btnLogIn);
-    btnLogIn.addEventListener("click", (e) =>{
+  const btnLogIn = document.createElement('a');
+  btnLogIn.classList.add('LogIn');
+  btnLogIn.innerHTML = 'Log In';
+  view.appendChild(btnLogIn);
+  btnLogIn.addEventListener('click', () => {
+    const emailLog = document.getElementById('email').value;
+    const passwordLog = document.getElementById('password').value;
 
-        var emailLog = document.getElementById("emailLog").value;
-        var passwordLog = document.getElementById("passwordLog").value;
+    firebase.auth().signInWithEmailAndPassword(emailLog, passwordLog).then(() => {
+      console.log('Logueado con éxito');
+      window.location.hash = '#/Wall';
+    })
+      .catch((error) => {
+      // Handle Errors here.
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        message(errorMessage);
+      });
 
-        firebase.auth().signInWithEmailAndPassword(emailLog, passwordLog).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(errorMessage);
-          }); 
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              // User is signed in.
-              var displayName = user.displayName;
-              var email = user.email;
-              var emailVerified = user.emailVerified;
-              var photoURL = user.photoURL;
-              var isAnonymous = user.isAnonymous;
-              var uid = user.uid;
-              var providerData = user.providerData;
-            } 
-          });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+      // User is signed in.
+        let displayName = user.displayName;
+        let email = user.email;
+        let emailVerified = user.emailVerified;
+        let photoURL = user.photoURL;
+        let isAnonymous = user.isAnonymous;
+        let uid = user.uid;
+        let providerData = user.providerData;
+      }
     });
-    return view;
-};
+  });
 
+  function messageGoogle(errorText) {
+    // crear un modal
+    console.log(errorText);
+  }
 
-
-
-
+  const logGoogle = document.createElement('a');
+  logGoogle.classList.add('LogGoogle');
+  logGoogle.innerHTML = '<img src="/Imagenes/googleIcono.png"/> <p>Sign in with Google</p> ';
+  view.appendChild(logGoogle);
+  logGoogle.addEventListener('click', () => {
+    // Estamos indicando que se pueda autenticar con google
+    const provider = new firebase.auth.GoogleAuthProvider();
+    // Popup es para abrir una ventana emergente
+    firebase.auth().signInWithPopup(provider).then((result) => {
+      const token = result.credential.accessToken;
+      console.log(token);
+      const user = result.user;
+      console.log(user);
+      window.location.hash = '#/Wall';
+    }).catch((error) => {
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      let email = error.email;
+      let credential = error.credential;
+      messageGoogle(error.message);
+    });
+    console.log(provider);
+  });
+  return view;
+}
