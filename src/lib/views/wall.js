@@ -132,8 +132,6 @@ export function Wall() {
         `;
   posts.appendChild(modals);
 
-  
-
   // Espacio del Post en la vista de Wall
   // function elementsPost(id, post) {
   //   createPost(posts, id, post);
