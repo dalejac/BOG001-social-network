@@ -15,7 +15,8 @@ Benevole es una red social de voluntariado en donde las personas interesadas pue
 ## 2. Prototipos
 
 ### Baja fidelidad
-
+<p align="center"> <img src="https://user-images.githubusercontent.com/65794191/94935214-5f90e600-0492-11eb-9ec1-bc83c0644066.png>
+ 
 ## 3. Diseño final
 
 -   Finalizado el proceso y diseño de los prototipos se dessarrolla el diseño final en figma, link: https://www.figma.com/file/4Vk94N8JSaZI9S3XR2tnzx/Voluntariado?node-id=0%3A1
@@ -43,10 +44,10 @@ Benevole es una red social de voluntariado en donde las personas interesadas pue
 * [X] Uso de condicionales (if-else | switch | operador ternario)
 * [X] Uso de funciones (parámetros | argumentos | valor de retorno)
 * [X] Manipular arrays (filter | map | sort | reduce)
-* [ ] Manipular objects (key | value)
+* [X] Manipular objects (key | value)
 * [X] Uso ES modules ([`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 | [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export))
-* [ ] Diferenciar entre expression y statements.
+* [X] Diferenciar entre expression y statements.
 * [X] Diferenciar entre tipos de datos primitivos y no primitivos.
 * [ ] [Uso de callbacks.](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
 * [ ] [Consumo de Promesas.](https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises)
@@ -73,7 +74,7 @@ Benevole es una red social de voluntariado en donde las personas interesadas pue
 ### Firebase
 
 * [X] [Firestore.](https://firebase.google.com/docs/firestore)
-* [ ] [Firebase Auth.](https://firebase.google.com/docs/auth/web/start)
+* [X] [Firebase Auth.](https://firebase.google.com/docs/auth/web/start)
 * [ ] [Firebase security rules.](https://firebase.google.com/docs/rules)
 * [X] Observadores. ([onAuthStateChanged](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
  | [onSnapshot](https://firebase.google.com/docs/firestore/query-data/listen#listen_to_multiple_documents_in_a_collection))
