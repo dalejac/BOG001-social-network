@@ -15,7 +15,9 @@ Benevole es una red social de voluntariado en donde las personas interesadas pue
 ## 2. Prototipos
 
 ### Baja fidelidad
-<p align="center"> <img src="https://user-images.githubusercontent.com/65794191/94935214-5f90e600-0492-11eb-9ec1-bc83c0644066.png" width="1000"> </p>
+<p align="center"> <img src="https://user-images.githubusercontent.com/65794191/94935214-5f90e600-0492-11eb-9ec1-bc83c0644066.png" width="400"> </p>
+
+Una vez realizado el feedback, se realizaron los ajustes al sketch y se dio paso al prototipo final.
  
 ## 3. Diseño final
 
