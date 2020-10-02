@@ -1,6 +1,6 @@
 # BENEVOLE 
 
-<p align="center"> <img src="" width="1000"> </p>
+<p align="center"> <img src="https://user-images.githubusercontent.com/65794191/94934097-e3e26980-0490-11eb-801b-c4aff45c546e.png" width="1000"> </p>
 
 ## Índice
 * [1. Descripción del proyecto](#1-resumen-del-proyecto)
