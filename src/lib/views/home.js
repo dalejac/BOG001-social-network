@@ -1,4 +1,6 @@
-import { handleClick } from '../../main.js';
+import {
+  handleClick
+} from '../../main.js';
 
 export function Home() {
   const firstView = document.getElementById('container');
@@ -48,7 +50,7 @@ export function Home() {
     <p>“You make a living by what you get. You make a life by what you give.”
     </br>
         -Winston Churchill-</p>
-            <img src="/Imagenes/volunteers1.png">`;
+            <img src="./Imagenes/volunteers1.png">`;
   view.appendChild(body);
 
   return view;

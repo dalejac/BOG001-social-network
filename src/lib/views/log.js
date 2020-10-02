@@ -1,4 +1,6 @@
-import { handleClick } from '../../main.js';
+import {
+  handleClick
+} from '../../main.js';
 
 export function LogIn() {
   const secondView = document.getElementById('container');
@@ -41,11 +43,11 @@ export function LogIn() {
     const passwordLog = document.getElementById('password').value;
 
     firebase.auth().signInWithEmailAndPassword(emailLog, passwordLog).then(() => {
-      console.log('Logueado con éxito');
-      window.location.hash = '#/Wall';
-    })
+        console.log('Logueado con éxito');
+        window.location.hash = '#/Wall';
+      })
       .catch((error) => {
-      // Handle Errors here.
+        // Handle Errors here.
         let errorCode = error.code;
         let errorMessage = error.message;
         message(errorMessage);
@@ -53,7 +55,7 @@ export function LogIn() {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-      // User is signed in.
+        // User is signed in.
         let displayName = user.displayName;
         let email = user.email;
         let emailVerified = user.emailVerified;
@@ -72,7 +74,7 @@ export function LogIn() {
 
   const logGoogle = document.createElement('a');
   logGoogle.classList.add('LogGoogle');
-  logGoogle.innerHTML = '<img src="/Imagenes/googleIcono.png"/> <p>Sign in with Google</p> ';
+  logGoogle.innerHTML = '<img src="./Imagenes/googleIcono.png"/> <p>Sign in with Google</p> ';
   view.appendChild(logGoogle);
   logGoogle.addEventListener('click', () => {
     // Estamos indicando que se pueda autenticar con google

@@ -7,6 +7,21 @@ export function Wall() {
   const view = document.createElement('section');
   wallView.appendChild(view);
 
+  const header = document.createElement('div');
+  header.innerHTML = `
+  <input type="checkbox" class="checkbox__hack" id="checkbox__hack">
+  <label for="checkbox__hack" class="checkbox-hack__label"></label>
+    <nav id="menu" class="nav--top"> 
+    <li>
+        <ul class="children menu-lateral nav--top__list">
+          <li class="menu-lateral__item"><a href="#/Profile" id="profile">Profile</a></li>
+          <li class="menu-lateral__item"><a href="/" id="logOut">Log Out</a></li>
+        </ul>
+    <li>
+    </nav> 
+    <h1 class="centerBenevole"> Benevole </h1>`;
+  view.appendChild(header);
+
   const wave3 = document.createElement('div');
   wave3.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -14,16 +29,7 @@ export function Wall() {
       </svg>`;
   view.appendChild(wave3);
 
-  const header = document.createElement('div');
-  header.innerHTML = `
-    <nav id="menu"> <img src=""> 
-        <ul>
-        <li><a href="#/Profile" id="profile">Profile</a></li>
-        <li><a href="/" id="logOut">Log Out</a></li>
-        </ul>
-    </nav> 
-    <h1> Benevole </h1>`;
-  view.appendChild(header);
+
 
   // Initialize Firestore
   var db = firebase.firestore();
@@ -84,6 +90,7 @@ export function Wall() {
   posted.classList.add('posted');
   posted.setAttribute('id', 'posted');
   view.appendChild(posted);
+
   function createPost() {
     const newpost = document.getElementById('posted');
     console.log(newpost);
@@ -102,10 +109,10 @@ export function Wall() {
     });
     var docRef = db.collection('Post').doc('some-id');
 
-// Update the timestamp field with the value from the server
-var updateTimestamp = docRef.update({
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-});
+    // Update the timestamp field with the value from the server
+    var updateTimestamp = docRef.update({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
   }
   createPost();
 
@@ -130,13 +137,13 @@ var updateTimestamp = docRef.update({
     // // var d = new Date();
 
     db.collection('Post').add({
-      post: description,
-      // time: date,
-    })
+        post: description,
+        // time: date,
+      })
       .then((docRef) => {
         console.log('Document written with ID: ', docRef.id);
         document.getElementById('publication').value = '';
-      // var fecha =
+        // var fecha =
       })
       .catch((error) => {
         console.error('Error adding document: ', error);
